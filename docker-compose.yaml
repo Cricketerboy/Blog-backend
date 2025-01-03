@@ -34,9 +34,9 @@ services:
   postgres:
     image: postgres:13
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: Kanpur@123
-      POSTGRES_DB: blog
+      POSTGRES_USER: blog_9f6f_user
+      POSTGRES_PASSWORD: okcEKVRKFSKISpe1pqdTA709EQWrTzYC
+      POSTGRES_DB: blog_9f6f
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
