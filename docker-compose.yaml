@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  user:
+    build:
+      context: ./user-service
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+    depends_on:
+      - postgres
+
+  blog:
+    build:
+      context: ./blog-service
+    ports:
+      - "5001:5001"
+    networks:
+      - app-network
+    depends_on:
+      - postgres
+
+  comment:
+    build:
+      context: ./comment-service
+    ports:
+      - "5002:5002"
+    networks:
+      - app-network
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Kanpur@123
+      POSTGRES_DB: blog
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+    driver: local
