@@ -1,18 +1,19 @@
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
-const useSSL = process.env.USE_SSL === 'true'; // Optional environment variable to control SSL
+ // Optional environment variable to control SSL
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
-    dialectOptions: useSSL
-        ? {
+    protocol: 'postgres',
+    dialectOptions: 
+          {   
               ssl: {
                   require: true, // Ensure SSL connection
                   rejectUnauthorized: false, // Avoid self-signed certificate errors
               },
-          }
-        : {},
+          },
+        logging: false,
 });
 
 // Test the connection
